@@ -1,0 +1,126 @@
+/* Reset Dasar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: #0f172a; /* Warna dasar gelap */
+    color: white;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* --- Animasi Latar Belakang --- */
+.bg-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    filter: blur(80px); /* Kunci efek blur lembut */
+}
+
+.blob {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: move 20s infinite alternate;
+}
+
+.blob-1 {
+    background: #3b82f6; /* Biru */
+    top: -10%;
+    left: -10%;
+}
+
+.blob-2 {
+    background: #a855f7; /* Ungu */
+    bottom: -10%;
+    right: -10%;
+    animation-delay: -5s;
+}
+
+.blob-3 {
+    background: #ec4899; /* Pink */
+    top: 40%;
+    left: 30%;
+    animation-delay: -10s;
+}
+
+@keyframes move {
+    0% { transform: translate(0, 0) scale(1); background: #3b82f6; }
+    33% { transform: translate(100px, 100px) scale(1.2); background: #10b981; }
+    66% { transform: translate(-50px, 200px) scale(0.8); background: #f59e0b; }
+    100% { transform: translate(0, 0) scale(1); background: #ec4899; }
+}
+
+/* --- Navigasi --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 10%;
+}
+
+.logo { font-size: 1.5rem; font-weight: bold; }
+.logo span { color: #3b82f6; }
+
+nav ul { display: flex; list-style: none; }
+nav ul li { margin-left: 2rem; }
+nav ul li a { color: white; text-decoration: none; opacity: 0.8; transition: 0.3s; }
+nav ul li a:hover { opacity: 1; color: #3b82f6; }
+
+/* --- Hero Section & Glassmorphism --- */
+.hero {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10%;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px); /* Efek kaca */
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 3rem;
+    border-radius: 24px;
+    text-align: center;
+    max-width: 700px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.glass-card h1 { font-size: 3rem; margin-bottom: 1rem; }
+.highlight { color: #3b82f6; }
+.glass-card p { font-size: 1.1rem; line-height: 1.6; opacity: 0.8; margin-bottom: 2rem; }
+
+/* Tombol */
+.cta-buttons { display: flex; gap: 1rem; justify-content: center; }
+button {
+    padding: 0.8rem 2rem;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-primary { background: #3b82f6; color: white; }
+.btn-primary:hover { background: #2563eb; transform: translateY(-3px); }
+
+.btn-secondary { background: transparent; color: white; border: 1px solid white; }
+.btn-secondary:hover { background: rgba(255, 255, 255, 0.1); }
+
+/* Responsivitas */
+@media (max-width: 768px) {
+    .glass-card h1 { font-size: 2rem; }
+    nav ul { display: none; } /* Sederhana untuk mobile */
+    .blob { width: 300px; height: 300px; }
+}
