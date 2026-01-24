@@ -3,49 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio | Musik & Responsive</title>
+    <title>Portofolio | Glass Navbar</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         /* --- Reset Dasar --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background: #0f172a;
-            color: white;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: #0f172a; color: white; overflow-x: hidden; min-height: 100vh; }
 
         /* --- Background Blobs --- */
-        .bg-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            filter: blur(80px);
-        }
-
-        .blob {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            border-radius: 50%;
-            opacity: 0.6;
-            animation: move 20s infinite alternate;
-        }
-
+        .bg-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; filter: blur(80px); }
+        .blob { position: absolute; width: 500px; height: 500px; border-radius: 50%; opacity: 0.6; animation: move 20s infinite alternate; }
         .blob-1 { background: #3b82f6; top: -10%; left: -10%; }
         .blob-2 { background: #a855f7; bottom: -10%; right: -10%; animation-delay: -5s; }
         .blob-3 { background: #ec4899; top: 40%; left: 30%; animation-delay: -10s; }
-
         @keyframes move {
             0% { transform: translate(0, 0) scale(1); background: #3b82f6; }
             33% { transform: translate(100px, 100px) scale(1.2); background: #10b981; }
@@ -53,173 +25,111 @@
             100% { transform: translate(0, 0) scale(1); background: #ec4899; }
         }
 
-        /* --- NAVIGASI --- */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 2rem 10%;
-            position: relative;
-            z-index: 100;
+        /* --- NAVBAR BENING & BLUR (UPDATED) --- */
+        nav { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 1.5rem 10%; /* Padding sedikit diperkecil agar rapi */
+            position: fixed; 
+            width: 100%; 
+            top: 0; 
+            z-index: 1000; 
+            
+            /* EFEK KACA BENING */
+            background: rgba(23, 25, 29, 0.1); /* Warna dasar sangat transparan */
+            backdrop-filter: blur(20px);        /* Efek buram yang kuat */
+            -webkit-backdrop-filter: blur(20px); /* Support Safari */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Garis batas tipis */
         }
-
+        
         .logo { font-size: 1.5rem; font-weight: bold; z-index: 101; }
         .logo span { color: #3b82f6; }
-
+        
         nav ul { display: flex; list-style: none; gap: 1rem; transition: all 0.3s ease; }
         
         nav ul li a { 
-            position: relative;
-            color: rgba(255, 255, 255, 0.8); 
+            position: relative; 
+            color: rgba(255, 255, 255, 0.9); /* Text lebih terang agar kontras di kaca bening */
             text-decoration: none; 
-            padding: 10px 25px;
-            border-radius: 50px;
-            transition: 0.3s;
-            z-index: 1;
-            display: block;
-            text-align: center;
+            padding: 10px 25px; 
+            border-radius: 50px; 
+            transition: 0.3s; 
+            z-index: 1; 
+            display: block; 
+            text-align: center; 
         }
 
-        nav ul li a::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            border-radius: 50px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: inset 0 4px 6px rgba(255, 255, 255, 0.2), inset 0 -4px 6px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0,0,0,0.2);
-            z-index: -1;
-            opacity: 0;
-            transform: scale(0.5);
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
+        nav ul li a::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: inset 0 4px 6px rgba(255, 255, 255, 0.2), inset 0 -4px 6px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0,0,0,0.2); z-index: -1; opacity: 0; transform: scale(0.5); transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
         nav ul li a:hover { color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
         nav ul li a:hover::before { opacity: 1; transform: scale(1); }
 
         /* --- HAMBURGER MENU --- */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 6px;
-            z-index: 101;
-        }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 6px; z-index: 1001; }
         .hamburger span { width: 30px; height: 3px; background-color: white; border-radius: 5px; transition: all 0.3s ease; }
 
-        /* --- Hero Section --- */
-        .hero {
-            height: 80vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0 10%;
-            position: relative;
-            z-index: 1;
+        /* --- GLOBAL GLASS CARD STYLE --- */
+        .glass-card { 
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 24px; 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); 
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 3rem;
-            border-radius: 24px;
-            text-align: center;
-            max-width: 700px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-
-        .glass-card h1 { font-size: 3rem; margin-bottom: 1rem; }
+        /* --- HERO SECTION --- */
+        .hero { height: 100vh; display: flex; justify-content: center; align-items: center; padding: 0 10%; position: relative; z-index: 1; margin-bottom: 50px; }
+        .hero-content { padding: 3rem; text-align: center; max-width: 700px; }
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+        .hero p { font-size: 1.1rem; line-height: 1.6; opacity: 0.8; margin-bottom: 2rem; }
         
-        .highlight {
-            background: linear-gradient(to right, #3b82f6, #a855f7, #ec4899, #3b82f6);
-            background-size: 200% auto;
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-            animation: shine 5s linear infinite;
-            font-weight: 800;
-        }
-
+        .highlight { background: linear-gradient(to right, #3b82f6, #a855f7, #ec4899, #3b82f6); background-size: 200% auto; background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: transparent; animation: shine 5s linear infinite; font-weight: 800; }
         @keyframes shine { to { background-position: 200% center; } }
 
-        .glass-card p { font-size: 1.1rem; line-height: 1.6; opacity: 0.8; margin-bottom: 2rem; }
-
         .cta-buttons { display: flex; gap: 1rem; justify-content: center; }
-        button {
-            padding: 0.8rem 2rem;
-            border-radius: 12px;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
+        button { padding: 0.8rem 2rem; border-radius: 12px; border: none; cursor: pointer; font-weight: 600; transition: 0.3s; }
         .btn-primary { background: #3b82f6; color: white; }
         .btn-primary:hover { background: #2563eb; transform: translateY(-3px); }
         .btn-secondary { background: transparent; color: white; border: 1px solid white; }
         .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); }
 
-        /* --- MUSIC PLAYER BUTTON (Baru) --- */
-        .music-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 100;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: 0.3s;
-        }
-
-        .music-btn:hover { transform: scale(1.1); background: rgba(255, 255, 255, 0.2); }
+        /* --- PROJECTS SECTION --- */
+        .projects-section { padding: 5rem 10%; position: relative; z-index: 1; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; font-weight: 800; }
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
         
-        /* Ikon Musik */
+        .project-card { padding: 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 250px; transition: 0.3s; cursor: default; }
+        .project-card:hover { transform: translateY(-10px); background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); }
+        .project-card i { font-size: 3rem; color: rgba(255, 255, 255, 0.3); margin-bottom: 1rem; }
+        .project-card h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .project-card p { opacity: 0.6; font-size: 0.9rem; }
+
+        /* --- MUSIC PLAYER BUTTON --- */
+        .music-btn { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; border-radius: 50%; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: 0.3s; }
+        .music-btn:hover { transform: scale(1.1); background: rgba(255, 255, 255, 0.2); }
         .music-btn i { font-size: 1.5rem; color: white; transition: 0.5s; }
-
-        /* Animasi Berputar saat Play */
         .music-btn.playing i { animation: spin 3s linear infinite; color: #3b82f6; text-shadow: 0 0 10px #3b82f6; }
-
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
         /* --- RESPONSIVE CSS --- */
         @media (max-width: 768px) {
             nav { padding: 1.5rem 5%; }
-            .glass-card h1 { font-size: 2rem; }
+            .hero h1 { font-size: 2rem; }
+            .section-title { font-size: 2rem; }
             .blob { width: 300px; height: 300px; }
-            
             .hamburger { display: flex; }
-            nav ul {
-                position: absolute; top: 0; left: 0; width: 100%; height: 100vh;
-                background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px);
-                flex-direction: column; justify-content: center; align-items: center; gap: 2rem;
-                transform: translateY(-100%); opacity: 0; transition: all 0.5s ease-in-out;
-            }
+            nav ul { position: absolute; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px); flex-direction: column; justify-content: center; align-items: center; gap: 2rem; transform: translateY(-100%); opacity: 0; transition: all 0.5s ease-in-out; }
             nav ul.active { transform: translateY(0); opacity: 1; }
             nav ul li a { font-size: 1.5rem; }
-            
             .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
             .hamburger.active span:nth-child(2) { opacity: 0; }
             .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
-
-            /* Geser tombol musik sedikit agar tidak tabrakan di layar kecil */
             .music-btn { bottom: 20px; right: 20px; width: 50px; height: 50px; }
         }
     </style>
 </head>
 <body>
+
     <div class="bg-container">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
@@ -232,33 +142,89 @@
             <span></span><span></span><span></span>
         </div>
         <ul id="nav-menu">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Project</a></li>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#projects">Project</a></li> 
             <li><a href="#">Contact</a></li>
         </ul>
     </nav>
 
-    <main class="hero">
-        <div class="glass-card">
+    <main id="home" class="hero">
+        <div class="glass-card hero-content">
             <h1>Halo, Saya <span class="highlight">Cavan</span></h1>
             <p>Seorang UI/UX Designer & Web Developer yang berfokus pada pengalaman digital yang estetik.</p>
             <div class="cta-buttons">
-                <button class="btn-primary">Lihat Karya</button>
+                <button class="btn-primary" onclick="document.getElementById('projects').scrollIntoView()">Lihat Karya</button> 
                 <button class="btn-secondary">Kontak Saya</button>
             </div>
         </div>
     </main>
 
+    <section id="projects" class="projects-section">
+        <h2 class="section-title"><span class="highlight">Project Saya</span></h2>
+        
+        <div class="project-grid">
+            <div class="glass-card project-card">
+                <i class="fa-solid fa-rocket"></i>
+                <h3>Project 1</h3>
+                <p>Coming Soon</p>
+            </div>
+
+            <div class="glass-card project-card">
+                <i class="fa-solid fa-code"></i>
+                <h3>Project 2</h3>
+                <p>Coming Soon</p>
+            </div>
+
+            <div class="glass-card project-card">
+                <i class="fa-solid fa-paintbrush"></i>
+                <h3>Project 3</h3>
+                <p>Coming Soon</p>
+            </div>
+        </div>
+    </section>
+
     <audio id="bg-music" loop autoplay>
         <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mp3">
     </audio>
 
-    <div class="music-btn" onclick="toggleMusic()">
+    <div class="music-btn" onclick="toggleMusicManual()">
         <i class="fa-solid fa-music"></i>
     </div>
 
 <script>
-    // Logic Hamburger Menu
+    const music = document.getElementById('bg-music');
+    const musicBtn = document.querySelector('.music-btn');
+    let isPlaying = false;
+
+    // --- AUTOPLAY LOGIC ---
+    window.addEventListener('load', () => {
+        var promise = music.play();
+        if (promise !== undefined) {
+            promise.then(_ => { isPlaying = true; updateBtnVisual(); })
+            .catch(error => {
+                document.body.addEventListener('click', forcePlayMusic, { once: true });
+                document.body.addEventListener('touchstart', forcePlayMusic, { once: true });
+            });
+        }
+    });
+
+    function forcePlayMusic() {
+        if (!isPlaying) { music.play(); isPlaying = true; updateBtnVisual(); }
+    }
+
+    // --- VISUAL & MANUAL TOGGLE ---
+    function updateBtnVisual() {
+        if (isPlaying) { musicBtn.classList.add('playing'); musicBtn.innerHTML = '<i class="fa-solid fa-music"></i>'; } 
+        else { musicBtn.classList.remove('playing'); }
+    }
+
+    function toggleMusicManual() {
+        if (isPlaying) { music.pause(); } else { music.play(); }
+        isPlaying = !isPlaying;
+        updateBtnVisual();
+    }
+
+    // --- HAMBURGER MENU & SMOOTH SCROLL CLOSE ---
     function toggleMenu() {
         const menu = document.getElementById('nav-menu');
         const hamburger = document.querySelector('.hamburger');
@@ -266,52 +232,16 @@
         hamburger.classList.toggle('active');
     }
 
-    // Logic Music Player
-    const music = document.getElementById('bg-music');
-    const musicBtn = document.querySelector('.music-btn');
-    let isPlaying = false;
-
-    function updateBtnVisual() {
-        if (isPlaying) {
-            musicBtn.classList.add('playing');
-            musicBtn.innerHTML = '<i class="fa-solid fa-music"></i>'; // Ikon tetap musik
-        } else {
-            musicBtn.classList.remove('playing');
-        }
-    }
-
-    function toggleMusic() {
-        if (isPlaying) {
-            music.pause();
-        } else {
-            music.play();
-        }
-        isPlaying = !isPlaying;
-        updateBtnVisual();
-    }
-
-    // --- FITUR AUTOPLAY PINTAR ---
-    
-    // 1. Coba putar langsung saat loading (Mungkin diblokir browser)
-    window.addEventListener('load', () => {
-        music.play().then(() => {
-            // Jika berhasil autoplay
-            isPlaying = true;
-            updateBtnVisual();
-        }).catch(error => {
-            // Jika diblokir browser, kita diam saja dulu
-            console.log("Autoplay dicegah browser, menunggu interaksi user.");
+    document.querySelectorAll('#nav-menu li a').forEach(link => {
+        link.addEventListener('click', () => {
+            const menu = document.getElementById('nav-menu');
+            const hamburger = document.querySelector('.hamburger');
+            if (menu.classList.contains('active')) {
+                menu.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
         });
     });
-
-    // 2. Putar musik saat pengguna klik DI MANA SAJA pertama kali
-    document.body.addEventListener('click', function() {
-        if (!isPlaying) {
-            music.play();
-            isPlaying = true;
-            updateBtnVisual();
-        }
-    }, { once: true }); // 'once: true' artinya event ini cuma jalan sekali aja di awal
 </script>
 </body>
 </html>
