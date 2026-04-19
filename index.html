@@ -4,47 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Porto.vans | Portfolio</title>
+    
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
 
-    <!-- Cursor glow -->
+    <body>
+
     <div class="cursor-glow" id="cursorGlow"></div>
-
-    <!-- Background -->
     <div class="bg-scene">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-        <div class="orb orb-4"></div>
+        <div class="orb orb-1"></div><div class="orb orb-2"></div>
+        <div class="orb orb-3"></div><div class="orb orb-4"></div>
     </div>
 
     <!-- Navbar -->
     <nav id="navbar">
         <div class="nav-top-row">
             <div class="logo">Porto.<span>vans</span></div>
-            <!-- Desktop menu -->
             <ul id="nav-menu">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#projects">Project</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <!-- Hamburger (mobile only) -->
             <div class="hamburger" id="hamburger" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
             </div>
         </div>
-
-        <!-- Liquid: Nav Menu (mobile) -->
         <div class="di-menu" id="di-menu">
             <div class="di-divider"></div>
-            <a href="#home" onclick="closeMenu()"><i class="fa-solid fa-house"></i>Home</a>
-            <a href="#projects" onclick="closeMenu()"><i class="fa-solid fa-rocket"></i>Project</a>
-            <a href="#contact" onclick="closeMenu()"><i class="fa-solid fa-envelope"></i>Contact</a>
+            <a href="#home"><i class="fa-solid fa-house"></i>Home</a>
+            <a href="#projects"><i class="fa-solid fa-rocket"></i>Project</a>
+            <a href="#contact"><i class="fa-solid fa-envelope"></i>Contact</a>
         </div>
-
-        <!-- Dynamic Island: Notification Panel -->
         <div class="di-notif" id="di-notif">
             <div class="di-divider"></div>
             <div class="notif-body" id="notif-body"></div>
@@ -61,13 +51,13 @@
             <h1>Halo, Saya <span class="highlight">Cavan</span></h1>
             <p>Seorang UI/UX Designer &amp; Web Developer yang berfokus pada pengalaman digital yang estetik dan bermakna.</p>
             <div class="badge-row">
-                <span class="badge"><i class="fa-solid fa-paintbrush" style="font-size:0.75rem;margin-right:4px"></i>UI/UX Design</span>
-                <span class="badge"><i class="fa-solid fa-code" style="font-size:0.75rem;margin-right:4px"></i>Web Dev</span>
-                <span class="badge"><i class="fa-solid fa-wand-magic-sparkles" style="font-size:0.75rem;margin-right:4px"></i>Motion</span>
+                <span class="badge"><i class="fa-solid fa-paintbrush" style="font-size:.75rem;margin-right:4px"></i>UI/UX Design</span>
+                <span class="badge"><i class="fa-solid fa-code" style="font-size:.75rem;margin-right:4px"></i>Web Dev</span>
+                <span class="badge"><i class="fa-solid fa-wand-magic-sparkles" style="font-size:.75rem;margin-right:4px"></i>Motion</span>
             </div>
             <div class="cta-buttons">
                 <button class="btn btn-primary" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">
-                    Lihat Karya <i class="fa-solid fa-arrow-right" style="margin-left:6px;font-size:0.8rem"></i>
+                    Lihat Karya <i class="fa-solid fa-arrow-right" style="margin-left:6px;font-size:.8rem"></i>
                 </button>
                 <button class="btn btn-secondary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
                     Kontak Saya
@@ -85,49 +75,55 @@
         <div class="skill-pill"><i class="fa-solid fa-mobile-screen" style="color:#c084fc"></i> Responsive</div>
     </div>
 
+    <!-- Card Modal Backdrop -->
+    <div id="cardBackdrop" onclick="closeCardModal()"></div>
+
+    <!-- Card Modal (flying card) -->
+    <div id="cardModal">
+        <div class="modal-close">
+            <div class="modal-close-btn" onclick="closeCardModal()"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+    </div>
+
     <!-- Projects -->
     <section id="projects" class="projects-section">
         <div class="section-header">
             <div class="section-label">Portfolio</div>
             <h2 class="section-title"><span class="highlight">Project Saya</span></h2>
         </div>
+        <div class="project-grid" id="projectGrid">
 
-        <div class="project-grid">
-            <div class="project-card">
-                <div class="card-icon-wrap">
-                    <i class="fa-solid fa-rocket icon-blue"></i>
-                </div>
+            <div class="project-card" onclick="openCardModal(this, 0)">
+                <div class="card-icon-wrap"><i class="fa-solid fa-rocket icon-blue"></i></div>
                 <h3>Project 1</h3>
-                <p>Deskripsi singkat project akan muncul di sini. Segera hadir dengan karya terbaik.</p>
+                <p>Aplikasi web modern dengan desain glassmorphism dan interaksi yang smooth.</p>
                 <div class="card-footer">
                     <span class="card-tag">Coming Soon</span>
                     <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </div>
 
-            <div class="project-card">
-                <div class="card-icon-wrap">
-                    <i class="fa-solid fa-code icon-purple"></i>
-                </div>
+            <div class="project-card" onclick="openCardModal(this, 1)">
+                <div class="card-icon-wrap"><i class="fa-solid fa-code icon-purple"></i></div>
                 <h3>Project 2</h3>
-                <p>Deskripsi singkat project akan muncul di sini. Segera hadir dengan karya terbaik.</p>
+                <p>Dashboard analitik real-time dengan visualisasi data interaktif dan elegan.</p>
                 <div class="card-footer">
                     <span class="card-tag">Coming Soon</span>
                     <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </div>
 
-            <div class="project-card">
-                <div class="card-icon-wrap">
-                    <i class="fa-solid fa-paintbrush icon-pink"></i>
-                </div>
+            <div class="project-card" onclick="openCardModal(this, 2)">
+                <div class="card-icon-wrap"><i class="fa-solid fa-paintbrush icon-pink"></i></div>
                 <h3>Project 3</h3>
-                <p>Deskripsi singkat project akan muncul di sini. Segera hadir dengan karya terbaik.</p>
+                <p>Design system lengkap dengan komponen reusable dan dokumentasi interaktif.</p>
                 <div class="card-footer">
                     <span class="card-tag">Coming Soon</span>
                     <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -137,28 +133,25 @@
             <h2>Ayo <span class="highlight">Terhubung</span></h2>
             <p>Terbuka untuk kolaborasi, freelance, maupun obrolan santai soal desain & teknologi.</p>
             <div class="social-links">
-                <a href="#" class="social-btn" onclick="confirmVisit(event,'github','fa-brands fa-github','#e2e8f0','https://github.com')"><i class="fa-brands fa-github"></i> GitHub</a>
-                <a href="#" class="social-btn" onclick="confirmVisit(event,'linkedin','fa-brands fa-linkedin','#60a5fa','https://linkedin.com')"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-                <a href="#" class="social-btn" onclick="confirmVisit(event,'instagram','fa-brands fa-instagram','#f472b6','https://instagram.com')"><i class="fa-brands fa-instagram"></i> Instagram</a>
-                <a href="#" class="social-btn" onclick="confirmVisit(event,'email','fa-solid fa-envelope','#34d399','mailto:hello@cavan.dev')"><i class="fa-solid fa-envelope"></i> Email</a>
+                <a href="#" class="social-btn" onclick="confirmVisit(event,'github','https://github.com')"><i class="fa-brands fa-github"></i> GitHub</a>
+                <a href="#" class="social-btn" onclick="confirmVisit(event,'linkedin','https://linkedin.com')"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                <a href="#" class="social-btn" onclick="confirmVisit(event,'instagram','https://instagram.com')"><i class="fa-brands fa-instagram"></i> Instagram</a>
+                <a href="#" class="social-btn" onclick="confirmVisit(event,'email','mailto:hello@cavan.dev')"><i class="fa-solid fa-envelope"></i> Email</a>
             </div>
         </div>
     </section>
 
-    <!-- Demo Alert Strip -->
+    <!-- Demo -->
     <div class="demo-strip">
         <div class="demo-strip-label">✦ Demo Notifikasi Navbar</div>
-        <button class="demo-btn info"    onclick="showNotif('info')">   <i class="fa-solid fa-circle-info"></i>  Info</button>
+        <button class="demo-btn info"    onclick="showNotif('info')"><i class="fa-solid fa-circle-info"></i> Info</button>
         <button class="demo-btn success" onclick="showNotif('success')"><i class="fa-solid fa-circle-check"></i> Success</button>
         <button class="demo-btn warning" onclick="showNotif('warning')"><i class="fa-solid fa-triangle-exclamation"></i> Warning</button>
-        <button class="demo-btn danger"  onclick="showNotif('danger')"> <i class="fa-solid fa-circle-xmark"></i> Error</button>
+        <button class="demo-btn danger"  onclick="showNotif('danger')"><i class="fa-solid fa-circle-xmark"></i> Error</button>
     </div>
 
-    <footer>
-        <p>Dibuat dengan ❤️ oleh <strong>Cavan</strong> &middot; 2025</p>
-    </footer>
+    <footer><p>Dibuat dengan ❤️ oleh <strong>Cavan</strong> &middot; 2025</p></footer>
 
-<script src="script.js"></script>
-
-</body>
+    <script src="script.js"></script>
+</body> 
 </html>
